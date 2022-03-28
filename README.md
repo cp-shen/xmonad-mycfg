@@ -1,0 +1,1 @@
+/home/scp/.config/xmonad/xmonad-mycfg/README.md

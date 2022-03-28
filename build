@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Recompile
+cd "$HOME/.config/xmonad/xmonad-mycfg" && stack install || exit
+
+# Create a hard link at the requested destination, replacing any existing one.
+ln -f -T "$(which xmonad-mycfg-exe)" "$1"
