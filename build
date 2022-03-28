@@ -1,7 +1,12 @@
 #!/bin/sh
 
 # Recompile
-cd "$HOME/.config/xmonad/xmonad-mycfg" && stack install || exit
+cd "$HOME/.xmonad" && stack install --flag xmobar:all_extensions || exit
 
 # Create a hard link at the requested destination, replacing any existing one.
-ln -f -T "$(which xmonad-mycfg-exe)" "$1"
+if [ "$#" -ne 0 ]; then
+   echo "linking to $1"
+   ln -f -T "$(which xmonad-mycfg-exe)" "$1"
+else
+   echo "no linking needed"
+fi
