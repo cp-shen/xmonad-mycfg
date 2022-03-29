@@ -101,8 +101,8 @@ myConfig = def
   , ("M-S-e", io (exitWith ExitSuccess))
 
     -- switch wotkspaces
-  , ("M-[", prevWS)
-  , ("M-]", nextWS)
+  , ("M-[", moveTo Prev (Not emptyWS))
+  , ("M-]", moveTo Next (Not emptyWS))
   , ("M-p", toggleRecentNonEmptyWS)
 
     -- launch applications
