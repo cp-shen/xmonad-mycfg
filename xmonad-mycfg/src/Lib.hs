@@ -61,6 +61,11 @@ myConfig = def
   , ("M-w", spawn "firefox")
   , ("M-e", spawn "emacsclient -c")
 
+    -- volume control using pulsemixer
+  , ("<XF86AudioMute>", spawn "pulsemixer --toggle-mute")
+  , ("<XF86AudioLowerVolume>", spawn "pulsemixer --change-volume -5")
+  , ("<XF86AudioRaiseVolume>", spawn "pulsemixer --change-volume +5")
+
     -- other misc key bindings
   -- , ("M-S-s", shellPrompt def)
   ]
