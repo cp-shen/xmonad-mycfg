@@ -61,7 +61,6 @@ myConfig = def
   , ("M-w", spawn "firefox")
   , ("M-e", spawn "emacsclient -c")
 
-
     -- other misc key bindings
   -- , ("M-S-s", shellPrompt def)
   ]
@@ -75,12 +74,12 @@ myConfig = def
 
   -- mod-{w,e,r} %! Switch to physical/Xinerama screens 1, 2, or 3
   -- mod-shift-{w,e,r} %! Move client to screen 1, 2, or 3
-  `additionalKeys`
-    [((m .|. modMask myConfig, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+  -- `additionalKeys`
+  --   [((m .|. modMask myConfig, key), screenWorkspace sc >>= flip whenJust (windows . f))
+  --       | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+  --       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
-myLayouts = tiled ||| Mirror tiled ||| Full ||| threeCol
+myLayouts = tiled ||| Mirror tiled ||| threeCol ||| Full
   where
     threeCol = ThreeCol nmaster delta ratio
     tiled = Tall nmaster delta ratio
