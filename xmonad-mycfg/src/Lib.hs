@@ -14,7 +14,8 @@ import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.DynamicLog
 import XMonad.Util.Loggers
 import XMonad.Hooks.ManageHelpers
-
+import XMonad.Layout.NoBorders
+import qualified ColorSchemes.OneDark as Cs
 
 entryPoint :: IO ()
 entryPoint = xmonad
@@ -22,7 +23,7 @@ entryPoint = xmonad
   $ ewmh
   $ withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) toggleStrutsKey
   $ myConfig
-  where toggleStrutsKey XConfig { modMask = m } = (m, xK_b)
+  where toggleStrutsKey XConfig { modMask = m } = (shiftMask + m , xK_b)
 
 myManageHook :: ManageHook
 myManageHook = composeAll
@@ -32,12 +33,16 @@ myManageHook = composeAll
 
 myXmobarPP :: PP
 myXmobarPP = def
-    { ppSep             = magenta " • "
+    {
+      ppSep             = magenta " • "
     , ppTitleSanitize   = xmobarStrip
-    , ppCurrent         = wrap " " "" . xmobarBorder "Top" "#8be9fd" 2
+
+    , ppCurrent         = white . wrap " " "" . xmobarBorder "Top" "#8be9fd" 2
+    , ppVisible         = white . wrap " " ""
     , ppHidden          = white . wrap " " ""
     , ppHiddenNoWindows = lowWhite . wrap " " ""
     , ppUrgent          = red . wrap (yellow "!") (yellow "!")
+
     , ppOrder           = \(ws : l : cur_win : wins : _) -> [ws, l, wins]
     , ppExtras          = [logTitles formatFocused formatUnfocused]
     }
@@ -51,20 +56,22 @@ myXmobarPP = def
     ppWindow = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 30
 
     blue, lowWhite, magenta, red, white, yellow :: String -> String
-    magenta  = xmobarColor "#ff79c6" ""
-    blue     = xmobarColor "#bd93f9" ""
-    white    = xmobarColor "#f8f8f2" ""
-    yellow   = xmobarColor "#f1fa8c" ""
-    red      = xmobarColor "#ff5555" ""
-    lowWhite = xmobarColor "#bbbbbb" ""
+    magenta  = xmobarColor Cs.magenta ""
+    blue     = xmobarColor Cs.blue ""
+    white    = xmobarColor Cs.white ""
+    yellow   = xmobarColor Cs.yellow ""
+    red      = xmobarColor Cs.red ""
+    lowWhite = xmobarColor Cs.lowWhite ""
 
 
 myConfig = def
   {
     modMask = mod4Mask
-  , terminal = "kitty"
+  , terminal = "alacritty"
   , layoutHook = myLayouts
   , manageHook = myManageHook
+  , normalBorderColor = Cs.lowWhite
+  , focusedBorderColor = Cs.magenta
   }
 
   `additionalKeysP`
@@ -97,7 +104,7 @@ myConfig = def
   , ("M-t", withFocused $ windows . W.sink)
 
     -- quit and restart
-  , ("M-S-r", spawn "kitty --hold sh -c 'xmonad --recompile && xmonad --restart'")
+  , ("M-S-r", spawn $ terminal myConfig ++ " --hold -e sh -c 'xmonad --recompile && xmonad --restart && echo ok! '")
   , ("M-S-e", io (exitWith ExitSuccess))
 
     -- switch wotkspaces
@@ -132,7 +139,11 @@ myConfig = def
   --       | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
   --       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
-myLayouts = tiled ||| Mirror tiled ||| threeCol ||| Full
+myLayouts =
+  smartBorders tiled
+  ||| smartBorders (Mirror tiled)
+  ||| smartBorders threeCol
+  ||| noBorders Full
   where
     threeCol = ThreeColMid nmaster delta ratio
     tiled = Tall nmaster delta ratio
