@@ -12,10 +12,12 @@ import System.Exit
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.DynamicLog
+import XMonad.Layout.Magnifier
 import XMonad.Util.Loggers
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.NoBorders
 import qualified ColorSchemes.OneDark as Cs
+import XMonad.Layout.Renamed
 
 entryPoint :: IO ()
 entryPoint = xmonad
@@ -84,7 +86,7 @@ myConfig = def
 
     -- change layouts
   , ("M-<Space>", sendMessage NextLayout)
-  --, ("M-S-<Space>", setLayout myLayouts)
+  --, ("M-S-<Space>", setLayout $ layoutHook myLayouts)
 
     -- focus movement
   , ("M-j", windows W.focusDown)
@@ -140,13 +142,15 @@ myConfig = def
   --       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 myLayouts =
-  smartBorders tiled
-  ||| smartBorders (Mirror tiled)
-  ||| smartBorders threeCol
-  ||| noBorders Full
+      renamed [Replace "Ta"] myTall
+  ||| renamed [Replace "Sp"] mySplit
+  ||| renamed [Replace "3C"] myThreeCol
+  ||| renamed [Replace "Fu"] myFull
   where
-    threeCol = ThreeColMid nmaster delta ratio
-    tiled = Tall nmaster delta ratio
+    myTall = smartBorders $ Tall nmaster delta ratio
+    mySplit = smartBorders $ Mirror $ Tall nmaster delta (ratio+0.2)
+    myThreeCol = smartBorders $ ThreeColMid nmaster delta ratio
+    myFull = noBorders Full
     nmaster = 1
     ratio = 1/2
-    delta = 3/100
+    delta = 5/100
