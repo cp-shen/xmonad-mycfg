@@ -21,7 +21,7 @@ myConfig =
   def
     { modMask = mod4Mask,
       terminal = "alacritty",
-      workspaces = if null myWsList then map show [1 .. 9 :: Int] else myWsList ,
+      workspaces = if null myWsList then map show [1 .. 9 :: Int] else myWsList,
       layoutHook = myLayouts,
       manageHook = myManageHook,
       normalBorderColor = Cs.lowWhite,

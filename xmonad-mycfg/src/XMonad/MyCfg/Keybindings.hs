@@ -65,6 +65,8 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
       -- launch applications
     , ("M-w", spawn "firefox")
     , ("M-e", spawn "emacsclient -c")
+    , ("M-g", spawn $ terminal conf
+        ++ " --class glances,Glances -e glances")
 
       -- volume control using pulsemixer
     , ("<XF86AudioMute>", spawn "pulsemixer --toggle-mute")
