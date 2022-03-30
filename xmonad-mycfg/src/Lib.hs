@@ -1,6 +1,7 @@
 module Lib (entryPoint) where
 
 import XMonad
+import qualified Data.Map as M
 import qualified XMonad.StackSet as W
 import XMonad.Actions.CycleWS
 import XMonad.Actions.CycleRecentWS
@@ -17,6 +18,7 @@ import XMonad.Util.Loggers
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.NoBorders
 import qualified ColorSchemes.OneDark as Cs
+import qualified Keys as MyKeys
 import XMonad.Layout.Renamed
 
 entryPoint :: IO ()
@@ -29,7 +31,9 @@ entryPoint = xmonad
 
 myManageHook :: ManageHook
 myManageHook = composeAll
-    [ className =? "Gimp" --> doFloat
+    [
+      className =? "Gimp" --> doFloat
+    , className =? "Glances" --> doShift "sys"
     , isDialog            --> doFloat
     ]
 
@@ -44,6 +48,7 @@ myXmobarPP = def
     , ppHidden          = white . wrap " " ""
     , ppHiddenNoWindows = lowWhite . wrap " " ""
     , ppUrgent          = red . wrap (yellow "!") (yellow "!")
+    , ppLayout          = lowWhite
 
     , ppOrder           = \(ws : l : cur_win : wins : _) -> [ws, l, wins]
     , ppExtras          = [logTitles formatFocused formatUnfocused]
@@ -75,6 +80,7 @@ myConfig = def
   , manageHook = myManageHook
   , normalBorderColor = Cs.lowWhite
   , focusedBorderColor = Cs.magenta
+  , keys = \conf -> M.fromList []
   }
 
   `additionalKeysP`
