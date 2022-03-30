@@ -1,6 +1,6 @@
 module Main where
 
-import Lib (entryPoint)
+import XMonad.MyCfg (entryPoint)
 
 main :: IO ()
 main = entryPoint

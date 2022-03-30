@@ -1,6 +1,0 @@
-module Lib (entryPoint) where
-
-import XMonad
-
-entryPoint :: IO ()
-entryPoint = xmonad def

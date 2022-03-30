@@ -1,0 +1,1 @@
+* TODO [#B] Make xmobar display Chinese / Japanese Chars

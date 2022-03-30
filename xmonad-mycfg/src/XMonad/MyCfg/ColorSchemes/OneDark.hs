@@ -1,6 +1,6 @@
 -- |
 
-module ColorSchemes.OneDark where
+module XMonad.MyCfg.ColorSchemes.OneDark where
 
 black    = "#1e2127"
 red      = "#e06c75"
