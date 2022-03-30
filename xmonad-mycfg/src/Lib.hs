@@ -25,7 +25,7 @@ entryPoint = xmonad
   $ ewmh
   $ withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) toggleStrutsKey
   $ myConfig
-  where toggleStrutsKey XConfig { modMask = m } = (shiftMask + m , xK_b)
+  where toggleStrutsKey XConfig { modMask = m } = (shiftMask .|. m , xK_b)
 
 myManageHook :: ManageHook
 myManageHook = composeAll
@@ -69,6 +69,7 @@ myXmobarPP = def
 myConfig = def
   {
     modMask = mod4Mask
+  , workspaces = ["term", "web", "sys", "mus", "dow", "ws6", "ws7", "ws8", "ws9", "emacs"]
   , terminal = "alacritty"
   , layoutHook = myLayouts
   , manageHook = myManageHook
@@ -130,16 +131,14 @@ myConfig = def
   -- mod-[1..9] %! Switch to workspace N
   -- mod-shift-[1..9] %! Move client to workspace N
   `additionalKeys`
-    [((m .|. modMask myConfig, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces myConfig) [xK_1 .. xK_9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-
-  -- mod-{w,e,r} %! Switch to physical/Xinerama screens 1, 2, or 3
-  -- mod-shift-{w,e,r} %! Move client to screen 1, 2, or 3
-  -- `additionalKeys`
-  --   [((m .|. modMask myConfig, key), screenWorkspace sc >>= flip whenJust (windows . f))
-  --       | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-  --       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+  [((m .|. modMask myConfig, k), windows $ f i)
+      | (i, k) <- zip (XMonad.workspaces myConfig) [xK_1 .. xK_9]
+      , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+  `additionalKeys`
+  [
+    ((modMask myConfig, xK_0),               windows $ W.greedyView "emacs")
+  , ((modMask myConfig .|. shiftMask, xK_0), windows $ W.shift "emacs")
+  ]
 
 myLayouts =
       renamed [Replace "Ta"] myTall
