@@ -8,6 +8,7 @@ import XMonad.Actions.CycleRecentWS
 import XMonad.Actions.CycleWS
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
+import XMonad.MyCfg.Workspaces (wsTerminal)
 
 myToggleStructsKey XConfig {modMask = m} = (shiftMask .|. m, xK_b)
 
@@ -61,6 +62,7 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-[", moveTo Prev (Not emptyWS))
     , ("M-]", moveTo Next (Not emptyWS))
     , ("M-p", toggleRecentNonEmptyWS)
+    , ("M-<Return>", windows $ W.greedyView wsTerminal)
 
       -- launch applications
     , ("M-w", spawn "firefox")

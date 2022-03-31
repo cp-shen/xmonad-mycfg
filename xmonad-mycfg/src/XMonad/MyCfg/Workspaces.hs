@@ -1,6 +1,16 @@
 -- |
 
-module XMonad.MyCfg.Workspaces where
+module XMonad.MyCfg.Workspaces (
+  myWsList,
+  ws1 , ws2 , ws3 , ws4 , ws5,
+  ws6 , ws7 , ws8 , ws9 , ws10,
+  wsDownloads,
+  wsTerminal,
+  wsWebpages,
+  wsSystem,
+  wsMusic,
+  wsEmacs,)
+  where
 
 ws1  = "term"
 ws2  = "web"
