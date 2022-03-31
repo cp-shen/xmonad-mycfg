@@ -32,18 +32,18 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-S-q", kill)
 
       -- change layouts
-    , ("M-<Space>", sendMessage NextLayout)
-    --, ("M-S-<Space>", setLayout $ layoutHook myLayouts)
+    , ("M-S-f", sendMessage NextLayout)
+    --, ("M-S-f", sendMessage $ JumpToLayout "Fu")
 
       -- focus movement
     , ("M-j", windows W.focusDown)
     , ("M-k", windows W.focusUp)
-    , ("M-m", windows W.focusMaster)
+    , ("M-<Space>", windows W.focusMaster)
 
       -- swap clients
     , ("M-S-j", windows W.swapDown)
     , ("M-S-k", windows W.swapUp)
-    , ("M-S-m", windows W.swapMaster)
+    , ("M-S-<Space>", windows W.swapMaster)
 
       -- shrink and expand
     , ("M-S-h", sendMessage Shrink)
