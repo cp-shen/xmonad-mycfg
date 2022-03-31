@@ -20,7 +20,7 @@ myManageHook = composeAll . concat $
   ]
   where
   doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
-  myFloats = ["Gimp", "gimp"]
+  myFloats = ["Gimp", "gimp", "xmessage", "Xmessage"]
   shiftToWs =
     [
       ("Glances",  "glances",  doShiftAndGo, wsSystem)
