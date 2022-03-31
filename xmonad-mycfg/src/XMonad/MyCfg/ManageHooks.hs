@@ -29,4 +29,5 @@ myManageHook = composeAll . concat $
     , ("Firefox",  "firefox",  doShiftAndGo, wsWebpages)
     , ("Chromium", "chromium", doShiftAndGo, wsWebpages)
     , ("Emacs",    "emacs",    doShiftAndGo, wsEmacs)
+    , ("qbittorrent", "qBittorrent", doShiftAndGo, wsDownloads)
     ]

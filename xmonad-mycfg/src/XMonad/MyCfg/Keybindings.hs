@@ -1,5 +1,5 @@
 -- |
-module XMonad.MyCfg.Keybindings (myKeys, myToggleStructsKey) where
+module XMonad.MyCfg.Keybindings (myKeys) where
 
 import qualified Data.Map as M
 import System.Exit
@@ -10,7 +10,7 @@ import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
 import XMonad.MyCfg.Workspaces (wsTerminal)
 
-myToggleStructsKey XConfig {modMask = m} = (shiftMask .|. m, xK_b)
+-- myToggleStructsKey XConfig {modMask = m} = (shiftMask .|. m, xK_b)
 
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
@@ -77,4 +77,13 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
 
       -- other misc key bindings
     -- , ("M-S-s", shellPrompt def)
+    , ("M-S-b", spawn toggleXmobarCmd)
     ]
+    where toggleXmobarCmd = "dbus-send"
+            ++ " --session"
+            ++ " --dest=org.Xmobar.Control"
+            ++ " --type=method_call"
+            ++ " --print-reply"
+            ++ " /org/Xmobar/Control"
+            ++ " org.Xmobar.Control.SendSignal"
+            ++ " \"string:Toggle 0\""
