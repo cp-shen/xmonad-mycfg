@@ -1,0 +1,12 @@
+[submodule "taffybar"]
+	path = taffybar
+	url = https://github.com/taffybar/taffybar
+[submodule "xmonad"]
+	path = xmonad
+	url = https://github.com/xmonad/xmonad
+[submodule "xmobar"]
+	path = xmobar
+	url = https://github.com/jaor/xmobar
+[submodule "xmonad-contrib"]
+	path = xmonad-contrib
+	url = https://github.com/xmonad/xmonad-contrib
