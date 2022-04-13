@@ -16,7 +16,7 @@ Config {
                         , "--high", "red"
                         , "--template", "Mem: <usedratio>%"
                         ] 10
-                    , Run Alsa "default" "Master" []
+                    , Run Alsa "default" "Master" [ "--" , "--on", ""]
                     , Run Date "%a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
                     , Run XMonadLog
                     ]
