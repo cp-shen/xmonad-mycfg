@@ -1,0 +1,30 @@
+Config {
+         font = "xft:Noto Sans CJK SC:pixelsize=12:antialias=true:hinting=true"
+       , additionalFonts  = []
+       , overrideRedirect = False
+       , bgColor  = "#1e2127"
+       , fgColor  = "#abb2bf"
+       , position = Top
+       , commands = [ Run Cpu
+                        [ "--Low", "1"
+                        , "--High", "50"
+                        , "--high", "red"
+                        ] 10
+                    , Run Memory
+                        [ "--Low", "1"
+                        , "--High", "50"
+                        , "--high", "red"
+                        , "--template", "Mem: <usedratio>%"
+                        ] 10
+                    , Run Volume "default" "Master"
+                        [ "--"
+                        , "--on", ""
+                        ] 10
+                    , Run Date "%a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
+                    , Run XMonadLog
+                    ]
+       , sepChar  = "%"
+       , alignSep = "}{"
+       , template = "%XMonadLog% }{ %default:Master% | %cpu% | %memory% | %date% "
+       }
+
