@@ -65,7 +65,7 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-<Return>", windows $ W.greedyView wsTerminal)
 
       -- launch applications
-    , ("M-w", spawn "firefox")
+    , ("M-w", spawn "google-chrome-stable")
     , ("M-e", spawn "emacsclient -c")
     , ("M-g", spawn $ terminal conf
         ++ " --class glances,Glances -e glances")
