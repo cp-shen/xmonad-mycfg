@@ -23,9 +23,15 @@ myConfig =
     { modMask = mod4Mask,
       terminal = "alacritty",
       workspaces = if null myWsList then map show [1 .. 9 :: Int] else myWsList,
+
       layoutHook = avoidStruts myLayouts,
       manageHook = myManageHook,
+
       normalBorderColor = Cs.lowWhite,
       focusedBorderColor = Cs.magenta,
+
+      focusFollowsMouse = False,
+      clickJustFocuses = True,
+
       keys = myKeys
     }
