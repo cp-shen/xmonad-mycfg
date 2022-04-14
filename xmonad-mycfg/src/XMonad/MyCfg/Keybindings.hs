@@ -6,11 +6,11 @@ import System.Exit
 import XMonad
 import XMonad.Actions.CycleRecentWS
 import XMonad.Actions.CycleWS
+import XMonad.Hooks.ManageDocks
+import XMonad.MyCfg.Workspaces
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
-import XMonad.MyCfg.Workspaces (wsTerminal)
-
--- myToggleStructsKey XConfig {modMask = m} = (shiftMask .|. m, xK_b)
+import XMonad.Util.Types
 
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
@@ -76,10 +76,11 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("<XF86AudioRaiseVolume>", spawn "pulsemixer --change-volume +5")
 
       -- other misc key bindings
-    -- , ("M-S-s", shellPrompt def)
-    , ("M-S-b", spawn toggleXmobarCmd)
+    , ("M-S-b", sendMessage (ToggleStrut U) <+> spawn togglePolybarCmd)
     ]
-    where toggleXmobarCmd = "dbus-send"
+    where
+      togglePolybarCmd = "polybar-msg cmd toggle"
+      toggleXmobarCmd = "dbus-send"
             ++ " --session"
             ++ " --dest=org.Xmobar.Control"
             ++ " --type=method_call"
