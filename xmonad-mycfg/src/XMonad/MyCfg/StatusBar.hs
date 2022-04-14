@@ -8,7 +8,8 @@ import XMonad.Hooks.StatusBar.PP
 import XMonad.Util.Loggers
 import qualified XMonad.MyCfg.ColorSchemes.OneDark as Cs
 
-myStatusBarEntry = statusBarProp "xmobar ~/.xmonad/xmobarrc" (pure myXmobarPP)
+-- myStatusBarEntry = statusBarProp "xmobar ~/.xmonad/xmobarrc" (pure myXmobarPP)
+myStatusBarEntry = statusBarGeneric "polybar mybar" mempty
 
 myXmobarPP :: PP
 myXmobarPP = def
