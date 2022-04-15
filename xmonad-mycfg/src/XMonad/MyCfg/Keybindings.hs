@@ -75,8 +75,11 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("<XF86AudioLowerVolume>", spawn "pulsemixer --change-volume -5")
     , ("<XF86AudioRaiseVolume>", spawn "pulsemixer --change-volume +5")
 
-      -- other misc key bindings
+      -- toogle status bar
     , ("M-S-b", sendMessage (ToggleStrut U) <+> spawn togglePolybarCmd)
+
+      -- take a screenshot
+    , ("M-S-<F1>", spawn "xfce4-screenshooter -r")
     ]
     where
       togglePolybarCmd = "polybar-msg cmd toggle"
