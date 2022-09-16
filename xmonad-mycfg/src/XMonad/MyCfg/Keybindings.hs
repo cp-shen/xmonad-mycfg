@@ -66,7 +66,7 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
 
       -- launch applications
     , ("M-w", spawn "google-chrome-stable")
-    , ("M-e", spawn "emacsclient -c")
+    , ("M-e", spawn "emacs") --FIXME: use emacsclient
     , ("M-g", spawn $ terminal conf
         ++ " --class glances,Glances -e glances")
 
