@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Recompile
-cd "$HOME/.xmonad" && stack install --flag xmobar:all_extensions || exit
+cd "$HOME/.xmonad" && stack install --system-ghc --resolver "lts-19.23" --verbose || exit
 
 # Create a hard link at the requested destination, replacing any existing one.
 if [ "$#" -ne 0 ]; then
