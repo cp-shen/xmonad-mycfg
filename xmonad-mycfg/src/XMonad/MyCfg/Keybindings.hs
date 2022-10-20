@@ -64,6 +64,9 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-p", toggleRecentNonEmptyWS)
     , ("M-<Return>", windows $ W.greedyView wsTerminal)
 
+    -- switch window using rofi
+    , ("M-<Tab>", spawn "rofi -show window -show-icons -no-sort -disable-history")
+
       -- launch applications
     , ("M-w", spawn "google-chrome-stable")
     , ("M-e", spawn "emacs") --FIXME: use emacsclient
