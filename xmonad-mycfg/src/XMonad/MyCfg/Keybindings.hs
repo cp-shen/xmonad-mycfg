@@ -54,9 +54,9 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-t", withFocused $ windows . W.sink)
 
       -- quit and restart
-    , ("M-S-r", spawn $ terminal conf
+    , ("M-S-C-r", spawn $ terminal conf
         ++ " --hold -e sh -c 'xmonad --recompile && xmonad --restart && echo ok! '")
-    , ("M-S-e", io exitSuccess )
+    , ("M-S-C-e", io exitSuccess )
 
       -- switch wotkspaces
     , ("M-[", moveTo Prev (Not emptyWS))
