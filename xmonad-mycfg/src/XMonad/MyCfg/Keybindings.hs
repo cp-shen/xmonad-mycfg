@@ -65,7 +65,9 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-<Return>", windows $ W.greedyView wsTerminal)
 
     -- switch window using rofi
-    , ("M-<Tab>", spawn "rofi -show window -show-icons -no-sort -disable-history")
+    , ("M-<Tab>", spawn "rofi -show window ")
+    , ("M-<Delete>", spawn "rofi -show window ")
+    , ("M-r", spawn "rofi -show drun ")
 
       -- launch applications
     , ("M-w", spawn "google-chrome-stable")
