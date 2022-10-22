@@ -81,8 +81,8 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("<XF86AudioRaiseVolume>", spawn "pulsemixer --change-volume +5")
 
       -- toogle status bar
-    , ("M-S-b", spawn togglePolybarCmd)
-    --, ("M-S-b", sendMessage (ToggleStrut U) <+> spawn togglePolybarCmd)
+    , ("M-b", spawn togglePolybarCmd)
+    --, ("M-b", sendMessage (ToggleStrut U) <+> spawn togglePolybarCmd)
 
       -- take a screenshot
     , ("M-S-<F1>", spawn "xfce4-screenshooter -r")
