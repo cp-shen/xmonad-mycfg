@@ -21,11 +21,11 @@ myManageHook =
     myFloats = ["Gimp", "gimp", "xmessage", "Xmessage"]
     shiftToWs =
       [ ("Alacritty", "alacritty", doShiftAndGo, wsTerminal),
-        ("Emacs", "emacs",         doShiftAndGo, wsEmacs),
+        ("Emacs", "emacs",         doShiftAndGo, wsCode),
         ("Chromium", "chromium",   doShiftAndGo, wsWebpages),
         ("Google-chrome", "google-chrome",   doShiftAndGo, wsWebpages),
         ("Firefox", "firefox",     doShiftAndGo, wsWebpages),
-        ("Glances", "glances",     doShiftAndGo, wsSystem),
+        ("Glances", "glances",     doShiftAndGo, wsTerminal),
         ("Mpv", "mpv",             doShiftAndGo, wsMusic),
         ("qbittorrent", "qBittorrent", doShiftAndGo, wsDownloads)
       ]
