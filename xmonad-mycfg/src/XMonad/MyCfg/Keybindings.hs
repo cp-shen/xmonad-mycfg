@@ -33,8 +33,12 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-S-q", kill)
 
       -- change layouts
-    , ("M-S-f", sendMessage NextLayout)
-    --, ("M-S-f", sendMessage $ JumpToLayout "Fu")
+    , ("M-S-n", sendMessage NextLayout)
+    , ("M-S-f", sendMessage $ JumpToLayout "Fu")
+    , ("M-S-v", sendMessage $ JumpToLayout "Ta")
+    , ("M-S-s", sendMessage $ JumpToLayout "Sp")
+    , ("M-S-a", sendMessage $ JumpToLayout "Ac")
+    , ("M-S-g", sendMessage $ JumpToLayout "Gr")
 
       -- focus movement
     , ("M-j", windows W.focusDown)
