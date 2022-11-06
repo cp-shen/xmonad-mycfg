@@ -74,7 +74,7 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
 
       -- launch applications
     , ("M-w", runOrRaiseNext  "google-chrome-stable" (className =? "Google-chrome"))
-    , ("M-S-w", runOrRaiseNext  "firefox" (className =? "firefox"))
+    , ("M-f", runOrRaiseNext  "firefox" (className =? "firefox"))
     , ("M-e", runOrRaiseNext "emacs" (className =? "Emacs"))  --FIXME: use emacsclient?
     , ("M-<Return>", runOrRaiseNext  "alacritty" (className =? "Alacritty"))
     -- , ("M-g", spawn $ terminal conf
