@@ -6,6 +6,7 @@ import System.Exit
 import XMonad
 import XMonad.Actions.CycleRecentWS
 import XMonad.Actions.CycleWS
+import XMonad.Actions.WindowGo
 import XMonad.Hooks.ManageDocks
 import XMonad.MyCfg.Workspaces
 import qualified XMonad.StackSet as W
@@ -26,11 +27,8 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
 
   strKeyMap =
     [
-      -- launch terminal
-      ("M-S-<Return>", spawn $ terminal conf)
-
       -- kill a client
-    , ("M-S-q", kill)
+      ("M-S-q", kill)
 
       -- change layouts
     , ("M-S-n", sendMessage NextLayout)
@@ -65,12 +63,9 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
       -- switch wotkspaces
     , ("M-]",      moveTo Next (Not emptyWS))
     , ("M1-<Tab>", moveTo Next (Not emptyWS))
-
     , ("M-[",        moveTo Prev (Not emptyWS))
     , ("M1-S-<Tab>", moveTo Prev (Not emptyWS))
-
     , ("M-p", toggleRecentNonEmptyWS)
-    , ("M-<Return>", windows $ W.greedyView wsTerminal)
 
     -- switch window using rofi
     , ("M-<Tab>", spawn "rofi -show window ")
@@ -79,10 +74,12 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-S-r", spawn "rofi -show drun ")
 
       -- launch applications
-    , ("M-w", spawn "google-chrome-stable")
-    , ("M-e", spawn "emacs") --FIXME: use emacsclient
-    , ("M-g", spawn $ terminal conf
-        ++ " --class glances,Glances -e glances")
+    , ("M-w", runOrRaiseNext  "google-chrome-stable" (className =? "Google-chrome"))
+    , ("M-S-w", runOrRaiseNext  "firefox" (className =? "Firefox"))
+    , ("M-e", runOrRaiseNext "emacs" (className =? "Emacs"))  --FIXME: use emacsclient?
+    , ("M-<Return>", runOrRaiseNext  "alacritty" (className =? "Alacritty"))
+    -- , ("M-g", spawn $ terminal conf
+    --     ++ " --class glances,Glances -e glances")
 
       -- volume control using pulsemixer
     , ("<XF86AudioMute>", spawn "pulsemixer --toggle-mute")
