@@ -71,7 +71,8 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     -- switch window using rofi
     , ("M-<Tab>", spawn "rofi -show window ")
     , ("M-<Delete>", spawn "rofi -show window ")
-    , ("M-r", spawn "rofi -show drun ")
+    , ("M-r", spawn "rofi -show window ")
+    , ("M-S-r", spawn "rofi -show drun ")
 
       -- launch applications
     , ("M-w", spawn "google-chrome-stable")
