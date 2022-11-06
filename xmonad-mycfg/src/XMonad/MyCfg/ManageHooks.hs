@@ -1,4 +1,4 @@
--- |
+--
 module XMonad.MyCfg.ManageHooks where
 
 import Control.Monad (liftM2)
@@ -14,18 +14,18 @@ myManageHook =
       [isDialog --> doFloat],
       [className =? c --> doFloat | c <- myFloats],
       --shifting
-      [(className =? c1 <||> className =? c2) --> f ws | (c1, c2, f, ws) <- shiftToWs]
+      [(className =? c1 <||> className =? c2) --> f ws | (f, ws, c1, c2) <- shiftToWs]
     ]
   where
     doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
     myFloats = ["Gimp", "gimp", "xmessage", "Xmessage"]
     shiftToWs =
-      [ ("Alacritty", "alacritty", doShiftAndGo, wsTerminal),
-        ("Emacs", "emacs",         doShiftAndGo, wsCode),
-        ("Chromium", "chromium",   doShiftAndGo, wsWebpages),
-        ("Google-chrome", "google-chrome",   doShiftAndGo, wsWebpages),
-        ("Firefox", "firefox",     doShiftAndGo, wsWebpages),
-        ("Glances", "glances",     doShiftAndGo, wsTerminal),
-        ("Mpv", "mpv",             doShiftAndGo, wsMusic),
-        ("qbittorrent", "qBittorrent", doShiftAndGo, wsDownloads)
+      [ (doShiftAndGo, wsTerminal, "Alacritty", ""),
+        -- (doShiftAndGo, wsTerminal, "Glances", ""),
+        (doShiftAndGo, wsWebpages, "Chromium-browser", ""),
+        (doShiftAndGo, wsWebpages, "Google-chrome", ""),
+        (doShiftAndGo, wsWebpages, "firefox", ""),
+        (doShiftAndGo, wsCode, "Emacs", ""),
+        (doShiftAndGo, wsMusic, "mpv", ""),
+        (doShiftAndGo, wsDownloads, "qBittorrent", "")
       ]
