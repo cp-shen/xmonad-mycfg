@@ -63,8 +63,12 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-S-C-e", io exitSuccess )
 
       -- switch wotkspaces
-    , ("M-[", moveTo Prev (Not emptyWS))
-    , ("M-]", moveTo Next (Not emptyWS))
+    , ("M-]",      moveTo Next (Not emptyWS))
+    , ("M1-<Tab>", moveTo Next (Not emptyWS))
+
+    , ("M-[",        moveTo Prev (Not emptyWS))
+    , ("M1-S-<Tab>", moveTo Prev (Not emptyWS))
+
     , ("M-p", toggleRecentNonEmptyWS)
     , ("M-<Return>", windows $ W.greedyView wsTerminal)
 
