@@ -2,12 +2,17 @@
 module XMonad.MyCfg.Keybindings (myKeys) where
 
 import qualified Data.Map as M
+import Data.Tree
 import System.Exit
 import XMonad
 import XMonad.Actions.CycleRecentWS
 import XMonad.Actions.CycleWS
+-- import XMonad.Actions.EasyMotion
+-- import XMonad.Actions.GridSelect
+import XMonad.Actions.TreeSelect (TSConfig (..), TSNode (..), treeselectAction)
 import XMonad.Actions.WindowGo
 import XMonad.Hooks.ManageDocks
+import qualified XMonad.MyCfg.ColorSchemes.OneDark as CS
 import XMonad.MyCfg.Workspaces
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
@@ -67,7 +72,7 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M1-S-<Tab>", moveTo Prev (Not emptyWS))
     , ("M-p", toggleRecentNonEmptyWS)
 
-    -- switch window using rofi
+      -- switch window using rofi
     , ("M-<Tab>", spawn "rofi -show window ")
     , ("M-<Delete>", spawn "rofi -show window ")
     , ("M-r", spawn "rofi -show drun")
@@ -77,6 +82,7 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-f", runOrRaiseNext  "firefox" (className =? "firefox"))
     , ("M-e", runOrRaiseNext "emacs" (className =? "Emacs"))  --FIXME: use emacsclient?
     , ("M-<Return>", runOrRaiseNext  "alacritty" (className =? "Alacritty"))
+    , ("M-S-<Return>", spawn  "alacritty")
     -- , ("M-g", spawn $ terminal conf
     --     ++ " --class glances,Glances -e glances")
 
@@ -87,12 +93,43 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
 
       -- toogle status bar
     , ("M-b", spawn togglePolybarCmd)
-    --, ("M-b", sendMessage (ToggleStrut U) <+> spawn togglePolybarCmd)
+    -- , ("M-b", sendMessage (ToggleStrut U) <+> spawn togglePolybarCmd)
 
       -- take a screenshot
     , ("M-S-<F1>", spawn "xfce4-screenshooter -r")
+
+      -- gridSelect menu
+    -- , ("M-m", goToSelected def)
+    -- , ("M-S-m", spawnSelected def ["firefox", "chromium"])
+
+      -- treeSelect menu
+    , ("M-S-m", treeselectAction myTreeConf myTreeMenu)
+
+      -- esay motion
+    -- , ("M-m", selectWindow def >>= (`whenJust` windows . W.focusWindow))
     ]
     where
+      blackP = read $ "0xff" ++ tail CS.black
+      whiteP = read $ "0xff" ++ tail CS.lowWhite
+      magentaP = read $ "0xff" ++ tail CS.magenta
+      myTreeConf = def {
+          ts_background   = 0xaa000000
+        , ts_node         = (blackP, whiteP)
+        , ts_nodealt      = (blackP, whiteP)
+        , ts_highlight    = (blackP, magentaP)
+        , ts_extra        = 0xff000000
+        }
+      myTreeMenu = [
+                     Node (TSNode "Suspend" "" (spawn "systemctl suspend")) []
+                   , Node (TSNode "ScreenOff" "" (spawn "xset dpms force off")) []
+                   , Node (TSNode "PowerOff" "" (spawn "systemctl poweroff")) []
+                   , Node (TSNode "ExitX" "" (io exitSuccess)) []
+                   -- , Node (TSNode "A Sub Menu" "" (return ()))
+                   --     [
+                   --       Node (TSNode "Hello1" "" (spawn "xmessage hello1!")) []
+                   --     , Node (TSNode "Hello2" "" (spawn "xmessage hello2!")) []
+                   --     ]
+                   ]
       togglePolybarCmd = "polybar-msg cmd toggle"
       toggleXmobarCmd = "dbus-send"
             ++ " --session"
