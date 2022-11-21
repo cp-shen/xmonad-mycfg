@@ -44,7 +44,9 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-S-g", sendMessage $ JumpToLayout "Gr")
 
       -- focus movement
+    , ("M-]", windows W.focusDown)
     , ("M-j", windows W.focusDown)
+    , ("M-[", windows W.focusUp)
     , ("M-k", windows W.focusUp)
     , ("M-<Space>", windows W.focusMaster)
 
@@ -66,9 +68,9 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-S-C-e", io exitSuccess )
 
       -- switch wotkspaces
-    , ("M-]",      moveTo Next (Not emptyWS))
+    , ("M-S-]",      moveTo Next (Not emptyWS))
     , ("M1-<Tab>", moveTo Next (Not emptyWS))
-    , ("M-[",        moveTo Prev (Not emptyWS))
+    , ("M-S-[",        moveTo Prev (Not emptyWS))
     , ("M1-S-<Tab>", moveTo Prev (Not emptyWS))
     , ("M-p", toggleRecentNonEmptyWS)
 
