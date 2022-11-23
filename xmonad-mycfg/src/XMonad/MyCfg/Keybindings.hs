@@ -46,8 +46,10 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
       -- focus movement
     , ("M-]", windows W.focusDown)
     , ("M-j", windows W.focusDown)
+    , ("M-<Tab>", windows W.focusDown)
     , ("M-[", windows W.focusUp)
     , ("M-k", windows W.focusUp)
+    , ("M-S-<Tab>", windows W.focusUp)
     , ("M-<Space>", windows W.focusMaster)
 
       -- swap clients
@@ -75,8 +77,8 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-p", toggleRecentNonEmptyWS)
 
       -- switch window using rofi
-    , ("M-<Tab>", spawn "rofi -show window ")
-    , ("M-<Delete>", spawn "rofi -show window ")
+    --, ("M-<Tab>", spawn "rofi -show window ")
+    --, ("M-<Delete>", spawn "rofi -show window ")
     , ("M-r", spawn "rofi -show drun")
 
       -- launch applications
