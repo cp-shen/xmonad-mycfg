@@ -25,9 +25,9 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     [ ((m .|. modMask conf, k), windows $ f i)
     | (i, k) <- zip wsList [xK_1 .. xK_9],
       (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)] ]
-    ++
-    [ ((modMask conf, xK_0), windows $ W.greedyView $ last wsList),
-      ((modMask conf .|. shiftMask, xK_0), windows $ W.shift $ last wsList) ]
+    -- ++
+    -- [ ((modMask conf, xK_0), windows $ W.greedyView $ last wsList),
+    --   ((modMask conf .|. shiftMask, xK_0), windows $ W.shift $ last wsList) ]
     where wsList = workspaces conf
 
   strKeyMap =
