@@ -26,6 +26,7 @@ myManageHook =
         (doShiftAndGo, wsWebpages, "Google-chrome", ""),
         (doShiftAndGo, wsWebpages, "firefox", ""),
         (doShiftAndGo, wsCode, "Emacs", ""),
+        (doShiftAndGo, wsCode, "Code", ""),
         (doShiftAndGo, wsEntertain, "mpv", ""),
         (doShiftAndGo, wsDownloads, "qBittorrent", "")
       ]
