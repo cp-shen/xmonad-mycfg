@@ -77,7 +77,7 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-p", toggleRecentNonEmptyWS)
 
       -- switch window using rofi
-    , ("M1-S-r", spawn "rofi -show windowcd")
+    , ("M-S-r", spawn "rofi -show windowcd")
     , ("M-r", spawn "rofi -show drun")
 
       -- launch applications
