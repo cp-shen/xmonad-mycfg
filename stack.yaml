@@ -1,10 +1,10 @@
 resolver: lts-19.23
 
 packages:
-  # - xmobar
 - xmonad
 - xmonad-contrib
 - xmonad-mycfg
+# - xmobar
 
 flags:
   #xmobar:
