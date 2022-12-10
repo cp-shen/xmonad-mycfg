@@ -20,8 +20,9 @@ myManageHook =
     doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
     myFloats = ["Gimp", "gimp", "xmessage", "Xmessage"]
     shiftToWs =
-      [ -- (doShiftAndGo, wsTerminal, "Alacritty", ""),
+      [ (doShiftAndGo, wsTerminal, "Alacritty", ""),
         -- (doShiftAndGo, wsTerminal, "Glances", ""),
+        (doShiftAndGo, wsClock, "Peaclock", ""),
         (doShiftAndGo, wsWebpages, "Chromium-browser", ""),
         (doShiftAndGo, wsWebpages, "Google-chrome", ""),
         (doShiftAndGo, wsWebpages, "firefox", ""),

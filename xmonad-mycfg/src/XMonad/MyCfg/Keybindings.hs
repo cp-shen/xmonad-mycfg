@@ -80,15 +80,15 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-S-r", spawn "rofi -show windowcd")
     , ("M-r", spawn "rofi -show drun")
 
-      -- launch applications
+      -- application shortcuts
     , ("M-w", runOrRaiseNext  "google-chrome-stable" (className =? "Google-chrome"))
     , ("M-f", runOrRaiseNext  "firefox" (className =? "firefox"))
     , ("M-e", runOrRaiseNext "emacs" (className =? "Emacs"))  --FIXME: use emacsclient?
-    , ("M-c", runOrRaiseNext  "code" (className =? "Code"))
+    , ("M-v", runOrRaiseNext  "code" (className =? "Code"))
     , ("M-<Return>", runOrRaiseNext  "alacritty" (className =? "Alacritty"))
     , ("M-S-<Return>", spawn  "alacritty")
-    -- , ("M-g", spawn $ terminal conf
-    --     ++ " --class glances,Glances -e glances")
+    , ("M-c", raiseNextMaybe (spawn "alacritty --class Peaclock -e peaclock") (className =? "Peaclock"))
+    , ("M-S-c", spawn "alacritty --class Peaclock -e peaclock" )
 
       -- volume control using pulsemixer
     , ("<XF86AudioMute>", spawn "pulsemixer --toggle-mute")

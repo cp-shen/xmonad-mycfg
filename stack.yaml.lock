@@ -3,24 +3,10 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages:
-- completed:
-    pantry-tree:
-      sha256: 42a57a2db0d8b44e04a04905ed56994b7293d2f244595bf3e65480c36d114ac3
-      size: 1598
-    hackage: netlink-1.1.1.0@sha256:d83424b5ba9921191449e4b1f53c7cba7f4375f2c55a9b737c77e982e1f40d00,3689
-  original:
-    hackage: netlink-1.1.1.0
-- completed:
-    pantry-tree:
-      sha256: 4af2758d0bd5fb52612d76b154bb4f5a2bae36fd2a668fca8d227041f600f477
-      size: 3772
-    hackage: libmpd-0.9.2.0@sha256:b514fe25cb131a8a563f1162524358b374c8ce7dde0de073f8a6849496fbe8c8,4010
-  original:
-    hackage: libmpd-0.9.2.0
+packages: []
 snapshots:
 - completed:
-    sha256: f5d9002479d87103fd070f17cfe71fcd2147676f1e47a2dabca5ab91a42b846d
-    size: 619399
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/19/23.yaml
-  original: lts-19.23
+    sha256: 6d1532d40621957a25bad5195bfca7938e8a06d923c91bc52aa0f3c41181f2d4
+    size: 619204
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/19/33.yaml
+  original: lts-19.33
