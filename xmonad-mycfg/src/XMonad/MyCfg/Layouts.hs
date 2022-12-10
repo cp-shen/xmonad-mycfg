@@ -11,9 +11,9 @@ import XMonad.Layout.Renamed
 import XMonad.MyCfg.Workspaces
 
 myLayouts =
-  -- onWorkspace wsTerminal (myAccord ||| myFull) $
   -- onWorkspace wsWebpages (myTall ||| myFull) $
   -- onWorkspace wsEmacs myFull $
+  onWorkspace wsTerminal (myGrid ||| myFull) $
   myTall ||| mySplit ||| myGrid ||| myFull ||| myAccord
   where
     myFull = renamed [Replace "Fu"] $ noBorders Full
