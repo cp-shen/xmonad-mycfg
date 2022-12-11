@@ -85,6 +85,7 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-S-<Return>", spawn  "alacritty")
     , ("M-c", raiseNextMaybe (spawn "alacritty --class Peaclock -e peaclock") (className =? "Peaclock"))
     , ("M-S-c", spawn "alacritty --class Peaclock -e peaclock" )
+    , ("M-m", raiseNextMaybe (spawn "alacritty --class Bottom -e btm") (className =? "Bottom"))
 
       -- volume control using pulsemixer
     , ("<XF86AudioMute>", spawn "pulsemixer --toggle-mute")
