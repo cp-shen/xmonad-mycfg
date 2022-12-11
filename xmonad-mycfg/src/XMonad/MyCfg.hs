@@ -26,6 +26,7 @@ myConfig =
 
       layoutHook = avoidStruts myLayouts,
       manageHook = myManageHook,
+      borderWidth = 2,
 
       normalBorderColor = Cs.lowWhite,
       focusedBorderColor = Cs.magenta,
