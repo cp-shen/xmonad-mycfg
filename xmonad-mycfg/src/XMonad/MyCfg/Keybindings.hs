@@ -7,16 +7,11 @@ import System.Exit
 import XMonad
 import XMonad.Actions.CycleRecentWS
 import XMonad.Actions.CycleWS
--- import XMonad.Actions.EasyMotion
--- import XMonad.Actions.GridSelect
 import XMonad.Actions.TreeSelect (TSConfig (..), TSNode (..), treeselectAction)
 import XMonad.Actions.WindowGo
-import XMonad.Hooks.ManageDocks
 import qualified XMonad.MyCfg.ColorSchemes.OneDark as CS
-import XMonad.MyCfg.Workspaces
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
-import XMonad.Util.Types
 
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
@@ -39,9 +34,10 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-S-n", sendMessage NextLayout)
     , ("M-S-f", sendMessage $ JumpToLayout "Fu")
     , ("M-S-v", sendMessage $ JumpToLayout "Ta")
-    , ("M-S-b", sendMessage $ JumpToLayout "Bi")
-    , ("M-S-g", sendMessage $ JumpToLayout "Gr")
-    , ("M-S-w", sendMessage $ JumpToLayout "Wi")
+    , ("M-S-s", sendMessage $ JumpToLayout "Sp")
+    , ("M-S-,", sendMessage $ IncMasterN 1)
+    , ("M-S-.", sendMessage $ IncMasterN (-1))
+    , ("M-S-/", setLayout $ XMonad.layoutHook conf)
 
       -- focus movement
     , ("M-]", windows W.focusDown)
