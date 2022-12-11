@@ -39,9 +39,9 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-S-n", sendMessage NextLayout)
     , ("M-S-f", sendMessage $ JumpToLayout "Fu")
     , ("M-S-v", sendMessage $ JumpToLayout "Ta")
-    , ("M-S-s", sendMessage $ JumpToLayout "Sp")
-    , ("M-S-a", sendMessage $ JumpToLayout "Ac")
+    , ("M-S-b", sendMessage $ JumpToLayout "Bi")
     , ("M-S-g", sendMessage $ JumpToLayout "Gr")
+    , ("M-S-w", sendMessage $ JumpToLayout "Wi")
 
       -- focus movement
     , ("M-]", windows W.focusDown)
