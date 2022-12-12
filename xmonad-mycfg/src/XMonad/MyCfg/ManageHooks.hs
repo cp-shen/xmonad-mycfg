@@ -21,7 +21,8 @@ myManageHook =
     myFloats = ["Gimp", "gimp", "xmessage", "Xmessage"]
     shiftToWs =
       [ (doShiftAndGo, wsTerminal, "Alacritty", ""),
-        -- (doShiftAndGo, wsTerminal, "Glances", ""),
+        (doShiftAndGo, wsTerminal, "Bottom", ""),
+        (doShiftAndGo, wsTerminal, "Glances", ""),
         (doShiftAndGo, wsClock, "Peaclock", ""),
         (doShiftAndGo, wsWebpages, "Chromium-browser", ""),
         (doShiftAndGo, wsWebpages, "Google-chrome", ""),
