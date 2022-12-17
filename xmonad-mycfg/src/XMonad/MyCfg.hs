@@ -12,6 +12,7 @@ import XMonad.MyCfg.Layouts
 import XMonad.MyCfg.ManageHooks
 import XMonad.MyCfg.StatusBar
 import XMonad.MyCfg.Workspaces
+import XMonad.MyCfg.MouseBindings
 import qualified XMonad.StackSet as W
 
 entryPoint :: IO ()
@@ -34,5 +35,6 @@ myConfig =
       focusFollowsMouse = False,
       clickJustFocuses = True,
 
-      keys = myKeys
+      keys = myKeys,
+      mouseBindings = \c -> M.union (XMonad.mouseBindings def c) (myMouseBindings c)
     }
