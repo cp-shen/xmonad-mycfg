@@ -1,12 +1,12 @@
 #!/bin/sh
 
 # Recompile
-cd "$HOME/.xmonad" && stack install --system-ghc --verbose || exit
+# cd "$HOME/.xmonad" && stack install --system-ghc --verbose || exit
 
 # Create a hard link at the requested destination, replacing any existing one.
-if [ "$#" -ne 0 ]; then
-   echo "linking to $1"
-   ln -f -T "$(which xmonad-mycfg-exe)" "$1"
-else
-   echo "no linking needed"
-fi
+# if [ "$#" -ne 0 ]; then
+#    echo "linking to $1"
+#    ln -f -T "$(which xmonad-mycfg-exe)" "$1"
+# else
+#    echo "no linking needed"
+# fi

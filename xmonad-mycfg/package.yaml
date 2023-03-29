@@ -1,26 +1,7 @@
-name:                xmonad-mycfg
-version:             0.1.0.0
-github:              "githubuser/xmonad-mycfg"
-license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2022 Author name here"
-
-extra-source-files:
-- README.md
-- ChangeLog.md
-
-# Metadata used when publishing your package
-# synopsis:            Short description of your package
-# category:            Web
-
-# To avoid duplicated efforts in documentation and dealing with the
-# complications of embedding Haddock markup inside cabal files, it is
-# common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/xmonad-mycfg#readme>
+name: xmonad-mycfg
 
 dependencies:
-- base >= 4.7 && < 5
+- base >= 4.7
 - containers
 - xmonad >= 0.17.0.9
 - xmonad-contrib >= 0.17.0.9
@@ -30,19 +11,8 @@ library:
 
 executables:
   xmonad-mycfg-exe:
-    main:                Main.hs
-    source-dirs:         app
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - xmonad-mycfg
-
-tests:
-  xmonad-mycfg-test:
-    main:                Spec.hs
-    source-dirs:         test
+    main: Main.hs
+    source-dirs: app
     ghc-options:
     - -threaded
     - -rtsopts
