@@ -10,7 +10,7 @@ library:
   source-dirs: src
 
 executables:
-  xmonad-mycfg-exe:
+  xmonad:
     main: Main.hs
     source-dirs: app
     ghc-options:

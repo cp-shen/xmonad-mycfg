@@ -29,7 +29,7 @@ library
     , xmonad-contrib >=0.17.0.9
   default-language: Haskell2010
 
-executable xmonad-mycfg-exe
+executable xmonad
   main-is: Main.hs
   other-modules:
       Paths_xmonad_mycfg
