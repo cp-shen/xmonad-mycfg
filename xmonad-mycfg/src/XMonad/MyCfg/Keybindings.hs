@@ -24,7 +24,7 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     -- [ ((modMask conf, xK_0), windows $ W.greedyView $ last wsList),
     --   ((modMask conf .|. shiftMask, xK_0), windows $ W.shift $ last wsList) ]
     ++ [((m .|. modMask conf, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_semicolon, xK_quoteleft] [0..]
+        | (key, sc) <- zip [xK_minus, xK_equal] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
     where wsList = workspaces conf
 
