@@ -65,8 +65,7 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
 
       -- quit and restart
     , ("M-S-C-r", spawn $ terminal conf
-        -- ++ " --hold -e sh -c 'xmonad --recompile && xmonad --restart && echo ok! '")
-        ++ " --hold -e sh -c 'xmonad --restart' ")
+        ++ " --hold -e sh -c 'xmonad --recompile && xmonad --restart && echo ok! '")
     , ("M-S-C-e", io exitSuccess )
 
       -- switch wotkspaces
