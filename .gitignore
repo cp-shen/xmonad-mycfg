@@ -6,3 +6,4 @@ xmonad.errors
 
 .direnv/
 result
+/xmonad-mycfg/dist-newstyle/
