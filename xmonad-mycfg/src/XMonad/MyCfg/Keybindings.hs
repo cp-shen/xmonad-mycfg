@@ -44,14 +44,11 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-l", nextScreen)
     , ("M-S-h", shiftPrevScreen >> prevScreen)
     , ("M-S-l", shiftNextScreen >> nextScreen)
+    , ("M-S-w", swapNextScreen >> nextScreen)
 
       -- focus movement
     , ("M-j", windows W.focusDown)
-    -- , ("M-]", windows W.focusDown)
-    -- , ("M-<Tab>", windows W.focusDown)
     , ("M-k", windows W.focusUp)
-    -- , ("M-[", windows W.focusUp)
-    -- , ("M-S-<Tab>", windows W.focusUp)
     , ("M-<Space>", windows W.focusMaster)
 
       -- swap clients
@@ -73,10 +70,6 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-S-C-e", io exitSuccess )
 
       -- switch wotkspaces
-    -- , ("M-S-]",      moveTo Next (Not emptyWS))
-    -- , ("M1-<Tab>", moveTo Next (Not emptyWS))
-    -- , ("M-S-[",        moveTo Prev (Not emptyWS))
-    -- , ("M1-S-<Tab>", moveTo Prev (Not emptyWS))
     , ("M-p", toggleWS)
 
       -- switch window using rofi
@@ -91,7 +84,6 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-<Return>", runOrRaiseNext "alacritty" (className =? "Alacritty"))
     , ("M-S-<Return>", spawn "alacritty")
     , ("M-c", raiseNextMaybe (spawn "alacritty --class Peaclock -e peaclock") (className =? "Peaclock"))
-    , ("M-S-c", spawn "alacritty --class Peaclock -e peaclock" )
     , ("M-m", raiseNextMaybe (spawn "alacritty --class Bottom -e btm") (className =? "Bottom"))
 
       -- volume control using pulsemixer
@@ -101,20 +93,12 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
 
       -- toogle status bar
     , ("M-b", spawn togglePolybarCmd)
-    -- , ("M-b", sendMessage (ToggleStrut U) <+> spawn togglePolybarCmd)
 
       -- take a screenshot
     , ("M-S-<F1>", spawn "xfce4-screenshooter -r")
 
-      -- gridSelect menu
-    -- , ("M-m", goToSelected def)
-    -- , ("M-S-m", spawnSelected def ["firefox", "chromium"])
-
       -- treeSelect menu
     , ("M-S-m", treeselectAction myTreeConf myTreeMenu)
-
-      -- esay motion
-    -- , ("M-m", selectWindow def >>= (`whenJust` windows . W.focusWindow))
     ]
     where
       blackP = read $ "0xff" ++ tail CS.black
