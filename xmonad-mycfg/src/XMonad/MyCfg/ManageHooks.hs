@@ -17,7 +17,7 @@ myManageHook =
       [(className =? c1 <||> className =? c2) --> f ws | (f, ws, c1, c2) <- shiftToWs]
     ]
   where
-    doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
+    doShiftAndGo = doF . liftM2 (.) W.view W.shift
     myFloats = ["Gimp", "gimp", "xmessage", "Xmessage"]
     shiftToWs =
       [ (doShiftAndGo, wsTerminal, "Alacritty", ""),

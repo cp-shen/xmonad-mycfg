@@ -5,6 +5,7 @@ import XMonad
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.StatusBar
+import XMonad.Hooks.WorkspaceHistory (workspaceHistoryHook)
 import qualified XMonad.MyCfg.ColorSchemes.OneDark as Cs
 import XMonad.MyCfg.Keybindings
 import XMonad.MyCfg.Layouts
@@ -24,6 +25,7 @@ myConfig =
       workspaces = if null myWsList then map show [1 .. 9 :: Int] else myWsList,
       layoutHook = avoidStruts myLayouts,
       manageHook = myManageHook,
+      logHook = workspaceHistoryHook >> def,
       borderWidth = 2,
       normalBorderColor = Cs.lowWhite,
       focusedBorderColor = Cs.magenta,

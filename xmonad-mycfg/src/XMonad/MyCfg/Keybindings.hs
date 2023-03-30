@@ -5,7 +5,6 @@ import qualified Data.Map as M
 import Data.Tree
 import System.Exit
 import XMonad
-import XMonad.Actions.CycleRecentWS
 import XMonad.Actions.CycleWS
 import XMonad.Actions.TreeSelect (TSConfig (..), TSNode (..), treeselectAction)
 import XMonad.Actions.WindowGo
@@ -17,16 +16,14 @@ myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
 
   keyMap = M.fromList $
-    [ ((m .|. modMask conf, k), windows $ f i)
+    [ ((m .|. modMask conf, k), f i)
     | (i, k) <- zip wsList [xK_1 .. xK_9],
-      (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)] ]
-    -- ++
-    -- [ ((modMask conf, xK_0), windows $ W.greedyView $ last wsList),
-    --   ((modMask conf .|. shiftMask, xK_0), windows $ W.shift $ last wsList) ]
-    ++ [((m .|. modMask conf, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_minus, xK_equal] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+      (f, m) <- [(toggleOrView', 0), (windows . W.shift, shiftMask)] ]
+    ++
+    [ ((modMask conf, xK_0), toggleOrView' $ last wsList),
+      ((modMask conf .|. shiftMask, xK_0), windows $ W.shift $ last wsList) ]
     where wsList = workspaces conf
+          toggleOrView' = toggleOrDoSkip [] W.view
 
   strKeyMap =
     [
@@ -42,13 +39,19 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-S-.", sendMessage $ IncMasterN (-1))
     , ("M-S-/", setLayout $ XMonad.layoutHook conf)
 
+      -- manipulate screens
+    , ("M-h", prevScreen)
+    , ("M-l", nextScreen)
+    , ("M-S-h", shiftPrevScreen >> prevScreen)
+    , ("M-S-l", shiftNextScreen >> nextScreen)
+
       -- focus movement
-    , ("M-]", windows W.focusDown)
     , ("M-j", windows W.focusDown)
-    , ("M-<Tab>", windows W.focusDown)
-    , ("M-[", windows W.focusUp)
+    -- , ("M-]", windows W.focusDown)
+    -- , ("M-<Tab>", windows W.focusDown)
     , ("M-k", windows W.focusUp)
-    , ("M-S-<Tab>", windows W.focusUp)
+    -- , ("M-[", windows W.focusUp)
+    -- , ("M-S-<Tab>", windows W.focusUp)
     , ("M-<Space>", windows W.focusMaster)
 
       -- swap clients
@@ -57,11 +60,12 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-S-<Space>", windows W.swapMaster)
 
       -- shrink and expand
-    , ("M-S-h", sendMessage Shrink)
-    , ("M-S-l", sendMessage Expand)
+    , ("M--", sendMessage Shrink)
+    , ("M-=", sendMessage Expand)
 
       -- toggle floating mode for clients
-    , ("M-t", withFocused $ windows . W.sink)
+    , ("M-S-t", withFocused $ windows . W.sink)
+    , ("M-t", withFocused toggleFloat)
 
       -- quit and restart
     , ("M-S-C-r", spawn $ terminal conf
@@ -69,23 +73,23 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
     , ("M-S-C-e", io exitSuccess )
 
       -- switch wotkspaces
-    , ("M-S-]",      moveTo Next (Not emptyWS))
-    , ("M1-<Tab>", moveTo Next (Not emptyWS))
-    , ("M-S-[",        moveTo Prev (Not emptyWS))
-    , ("M1-S-<Tab>", moveTo Prev (Not emptyWS))
-    , ("M-p", toggleRecentNonEmptyWS)
+    -- , ("M-S-]",      moveTo Next (Not emptyWS))
+    -- , ("M1-<Tab>", moveTo Next (Not emptyWS))
+    -- , ("M-S-[",        moveTo Prev (Not emptyWS))
+    -- , ("M1-S-<Tab>", moveTo Prev (Not emptyWS))
+    , ("M-p", toggleWS)
 
       -- switch window using rofi
     , ("M-S-r", spawn "rofi -show windowcd")
     , ("M-r", spawn "rofi -show drun")
 
       -- application shortcuts
-    , ("M-w", runOrRaiseNext  "google-chrome-stable" (className =? "Google-chrome"))
-    , ("M-f", runOrRaiseNext  "firefox" (className =? "firefox"))
+    , ("M-w", runOrRaiseNext "google-chrome-stable" (className =? "Google-chrome"))
+    , ("M-f", runOrRaiseNext "firefox" (className =? "firefox"))
     , ("M-e", runOrRaiseNext "emacs" (className =? "Emacs"))  --FIXME: use emacsclient?
-    , ("M-v", runOrRaiseNext  "code" (className =? "Code"))
-    , ("M-<Return>", runOrRaiseNext  "alacritty" (className =? "Alacritty"))
-    , ("M-S-<Return>", spawn  "alacritty")
+    , ("M-v", runOrRaiseNext "code" (className =? "Code"))
+    , ("M-<Return>", runOrRaiseNext "alacritty" (className =? "Alacritty"))
+    , ("M-S-<Return>", spawn "alacritty")
     , ("M-c", raiseNextMaybe (spawn "alacritty --class Peaclock -e peaclock") (className =? "Peaclock"))
     , ("M-S-c", spawn "alacritty --class Peaclock -e peaclock" )
     , ("M-m", raiseNextMaybe (spawn "alacritty --class Bottom -e btm") (className =? "Bottom"))
@@ -144,3 +148,11 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
             ++ " /org/Xmobar/Control"
             ++ " org.Xmobar.Control.SendSignal"
             ++ " \"string:Toggle 0\""
+      toggleFloat :: Window -> X ()
+      toggleFloat w =
+        windows
+          ( \s ->
+              if M.member w (W.floating s)
+                then W.sink w s
+                else W.float w (W.RationalRect 0.1 0.1 0.5 0.5) $ W.shiftMaster s
+          )
