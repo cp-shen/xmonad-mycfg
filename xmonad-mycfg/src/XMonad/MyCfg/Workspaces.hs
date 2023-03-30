@@ -7,7 +7,7 @@ module XMonad.MyCfg.Workspaces
     wsCode,
     wsClock,
     wsDownloads,
-    wsEntertain,
+    vsVideo,
     wsTerminal,
     wsWebpages,
   )
@@ -16,7 +16,7 @@ where
 ws1 = "代码"
 ws2 = "终端"
 ws3 = "网页"
-ws4 = "娱乐"
+ws4 = "视频"
 ws5 = "下载"
 ws6 = "其他"
 ws7 = "7"
@@ -28,7 +28,7 @@ wsCode = ws1
 wsTerminal = ws2
 wsClock = ws2
 wsWebpages = ws3
-wsEntertain = ws4
+vsVideo = ws4
 wsDownloads = ws5
 
 myWsList =

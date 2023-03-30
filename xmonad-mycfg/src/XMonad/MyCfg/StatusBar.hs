@@ -1,6 +1,6 @@
 -- |
 
-module XMonad.MyCfg.StatusBar (myStatusBarEntry) where
+module XMonad.MyCfg.StatusBar (myPolybarEntry1, myPolybarEntry2) where
 
 import XMonad
 import XMonad.Hooks.StatusBar
@@ -8,8 +8,9 @@ import XMonad.Hooks.StatusBar.PP
 import XMonad.Util.Loggers
 import qualified XMonad.MyCfg.ColorSchemes.OneDark as Cs
 
--- myStatusBarEntry = statusBarProp "xmobar ~/.xmonad/xmobarrc" (pure myXmobarPP)
-myStatusBarEntry = statusBarGeneric "polybar mybar" mempty
+-- myXmobarEntry = statusBarProp "xmobar ~/.xmonad/xmobarrc" (pure myXmobarPP)
+myPolybarEntry1 = statusBarGeneric "polybar mybar1" mempty
+myPolybarEntry2 = statusBarGeneric "polybar mybar2" mempty
 
 myXmobarPP :: PP
 myXmobarPP = def

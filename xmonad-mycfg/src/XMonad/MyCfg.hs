@@ -15,7 +15,7 @@ import XMonad.MyCfg.Workspaces
 
 entryPoint :: IO ()
 entryPoint =
-  xmonad $ docks $ ewmh $ withSB myStatusBarEntry myConfig
+  xmonad $ docks $ ewmh $ withSB myPolybarEntry2 $ withSB myPolybarEntry1 myConfig
 
 myConfig =
   def
