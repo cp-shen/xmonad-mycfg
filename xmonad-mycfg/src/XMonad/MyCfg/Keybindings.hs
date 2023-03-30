@@ -125,6 +125,7 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap where
         }
       myTreeMenu = [
                      Node (TSNode "Suspend" "" (spawn "systemctl suspend")) []
+                   , Node (TSNode "Hibernate" "" (spawn "systemctl hibernate")) []
                    , Node (TSNode "ScreenOff" "" (spawn "xset dpms force off")) []
                    , Node (TSNode "PowerOff" "" (spawn "systemctl poweroff")) []
                    , Node (TSNode "ExitX" "" (io exitSuccess)) []
