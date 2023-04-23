@@ -1,0 +1,10 @@
+cradle:
+  stack:
+    - path: "xmonad-mycfg/src"
+      component: "xmonad-mycfg:lib"
+
+    - path: "xmonad-mycfg/app/Main.hs"
+      component: "xmonad-mycfg:exe:xmonad"
+
+    - path: "xmonad-mycfg/app/Paths_xmonad_mycfg.hs"
+      component: "xmonad-mycfg:exe:xmonad"
