@@ -74,7 +74,8 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap
         -- ("M-w", runOrRaiseNext "google-chrome-stable" (className =? "Google-chrome")),
         ("M-f", runOrRaiseNext "firefox" (className =? "firefox")),
         ("M-e", runOrRaiseNext "emacs" (className =? "Emacs")), -- FIXME: use emacsclient?
-        ("M-v", runOrRaiseNext "code" (className =? "Code")),
+        -- ("M-v", runOrRaiseNext "code" (className =? "Code")),
+        ("M-v", runOrRaiseNext "neovide" (className =? "neovide")),
         ("M-<Return>", runOrRaiseNext "alacritty" (className =? "Alacritty")),
         ("M-S-<Return>", spawn "alacritty"),
         ("M-c", raiseNextMaybe (spawn "alacritty --class Peaclock -e peaclock") (className =? "Peaclock")),
