@@ -68,7 +68,7 @@ myKeys conf = M.union keyMap $ mkKeymap conf strKeyMap
         -- switch wotkspaces
         ("M-p", toggleWS),
         -- switch window using rofi
-        ("M-S-r", spawn "rofi -show windowcd"),
+        ("M-S-r", spawn "rofi -show window"),
         ("M-r", spawn "rofi -show drun"),
         -- application shortcuts
         ("M-w", runOrRaiseNext "google-chrome-stable" (className =? "Google-chrome")),
